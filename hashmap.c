@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 struct node{
-    int key;
-    int val;
+    int key,val;
     struct node *next;
 };
 struct table{
@@ -13,14 +12,11 @@ struct table *createTable(int size){
     struct table *t = (struct table*)malloc(sizeof(struct table));
     t->size = size;
     t->list = (struct node**)malloc(sizeof(struct node*)*size);
-    int i;
-    for(i=0;i<size;i++)
-        t->list[i] = NULL;
+    for(int i=0;i<size;i++){t->list[i] = NULL;}
     return t;
 }
 int hashCode(struct table *t,int key){
-    if(key<0)
-        return -(key%t->size);
+    if(key<0){return -(key%t->size);}
     return key%t->size;
 }
 void insert(struct table *t,int key,int val){
@@ -31,8 +27,7 @@ void insert(struct table *t,int key,int val){
     while(temp){
         if(temp->key==key){
             temp->val = val;
-            return;
-        }
+            return;}
         temp = temp->next;
     }
     newNode->key = key;
@@ -45,16 +40,13 @@ int lookup(struct table *t,int key){
     struct node *list = t->list[pos];
     struct node *temp = list;
     while(temp){
-        if(temp->key==key){
-            return temp->val;
-        }
+        if(temp->key==key){return temp->val;}
         temp = temp->next;
     }
     return -1;
 }
 int main(){
     struct table *t = createTable(5);
-    insert(t,2,3);
     insert(t,5,4);
     printf("%d",lookup(t,5));
     return 0;
