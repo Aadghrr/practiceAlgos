@@ -12,12 +12,12 @@ struct stack* createStack(){
  return newStack;
 }
 
-void push(struct rootStack*,int value){
- rootStack->array[top]=value;
+void push(struct stack* rootStack,int value){
+ rootStack->array[rootStack->top]=value;
  rootStack->top+=1;
 }
-int pop(struct rootStack*){
- int value = rootStack->array[top-1];
+int pop(struct stack* rootStack){
+ int value = rootStack->array[rootStack->top-1];
  rootStack->top-=1;
  return value;
 }
